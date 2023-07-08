@@ -16,7 +16,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake git pkg-config libpoppler-cpp-dev poppler-data
+          sudo apt-get install -y build-essential cmake git pkg-config libpoppler-cpp-dev poppler-data libfontforge-dev
 
       - name: Clone pdf2htmlEX repository
         run: |
@@ -25,6 +25,7 @@ jobs:
       - name: Build and install pdf2htmlex
         run: |
           cd pdf2htmlEX
+          rm -rf build
           mkdir build
           cd build
           cmake ..
