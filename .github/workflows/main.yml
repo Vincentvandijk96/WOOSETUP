@@ -16,7 +16,12 @@ jobs:
       - name: Install pdf2htmlex
         run: |
           sudo apt-get update
-          sudo apt-get install -y pdf2htmlex
+          sudo apt-get install -y libfontconfig1 libcairo2 libjpeg-turbo8
+          wget https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb
+          sudo mv pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb pdf2htmlEX.deb
+          sudo apt install ./pdf2htmlEX.deb
+          
+
 
       - name: Remove existing HTML files
         run: |
