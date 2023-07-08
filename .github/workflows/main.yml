@@ -13,32 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install build dependencies
+      - name: Install pdf2htmlex and Tesseract OCR
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake git pkg-config libpoppler-cpp-dev poppler-data
-
-      - name: Clone pdf2htmlEX repository
-        run: |
-          git clone --recursive https://github.com/coolwanglu/pdf2htmlEX.git
-
-      - name: Find FindPkgConfig.cmake file
-        run: |
-          find pdf2htmlEX -name "FindPkgConfig.cmake" -execdir mv {} ../FindPkgConfig.cmake \;
-
-      - name: Modify FindPkgConfig.cmake
-        run: |
-          sed -i 's/ REQUIRED libfontforge)//' ../FindPkgConfig.cmake
-
-      - name: Build and install pdf2htmlex
-        run: |
-          cd pdf2htmlEX
-          rm -rf build
-          mkdir build
-          cd build
-          cmake ..
-          make -j$(nproc)
-          sudo make install
+          sudo apt-get install -y pdf2htmlex tesseract-ocr
 
       - name: Remove existing HTML files
         run: |
