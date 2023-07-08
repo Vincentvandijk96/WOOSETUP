@@ -22,6 +22,10 @@ jobs:
         run: |
           git clone --recursive https://github.com/coolwanglu/pdf2htmlEX.git
 
+      - name: Modify FindPkgConfig.cmake
+        run: |
+          sed -i 's/ REQUIRED libfontforge)//' pdf2htmlEX/cmake/FindPkgConfig.cmake
+
       - name: Build and install pdf2htmlex
         run: |
           cd pdf2htmlEX
