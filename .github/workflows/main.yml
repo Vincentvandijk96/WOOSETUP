@@ -28,16 +28,15 @@ jobs:
       - name: Convert PDF to HTML
         run: |
           echo "</ul></body></html>" >> docs/index.html
-          mkdir -p docs
           echo "<html><body><ul>" > docs/index.html
           find . -name "*.pdf" -print0 | while IFS= read -r -d '' file; do
             filename=$(basename "$file" .pdf)
             htmlname="docs/$filename.html"
-            pdf2htmlEX --embed cfijo --dest-dir "$htmlname" "$file"
+            pdf2htmlEX --embed cfijo --dest-dir docs "$file"
+            mv "docs/$filename.html" "$htmlname"
             echo "<li><a href='$filename.html'>$filename</a></li>" >> docs/index.html
           done
           echo "</ul></body></html>" >> docs/index.html
-          find docs -name "*-html.html" -exec bash -c 'mv "$0" "${0//-html/}"' {} \;
 
       - name: Generate sitemap.xml
         run: |
