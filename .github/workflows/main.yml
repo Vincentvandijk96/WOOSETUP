@@ -33,7 +33,6 @@ jobs:
             filename=$(basename "$file" .pdf)
             htmlname="docs/$filename.html"
             pdf2htmlEX --embed cfijo --dest-dir docs "$file"
-            mv "docs/$filename.html" "$htmlname"
             echo "<li><a href='$filename.html'>$filename</a></li>" >> docs/index.html
           done
           echo "</ul></body></html>" >> docs/index.html
