@@ -1,4 +1,4 @@
-name: PDF to HTML Conversion with OCR
+name: PDF to HTML Conversion
 
 on:
   push:
@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install pdf2htmlex
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils tesseract-ocr
+          sudo apt-get install -y pdf2htmlex
 
       - name: Remove existing HTML files
         run: |
@@ -30,16 +30,7 @@ jobs:
           find . -name "*.pdf" -print0 | while IFS= read -r -d '' file; do
             filename=$(basename "$file" .pdf)
             htmlname="docs/$filename.html"
-            txtname="docs/$filename.txt"
-            pdftohtml -s -c "$file" "$htmlname"
-            pdftotext "$file" "$txtname"
-            text=$(cat "$txtname" | tr -d '\n' | tr -d '\r')
-            ocrtext=$(tesseract "$htmlname" stdout --psm 6)
-            if [[ -n $text ]]; then
-              sed -i "s|</body></html>|<pre>$text</pre></body></html>|" "$htmlname"
-            elif [[ -n $ocrtext ]]; then
-              sed -i "s|</body></html>|<pre>$ocrtext</pre></body></html>|" "$htmlname"
-            fi
+            pdf2htmlEX --embed cfijo --dest-dir "$htmlname" "$file"
             echo "<li><a href='$filename.html'>$filename</a></li>" >> docs/index.html
           done
           echo "</ul></body></html>" >> docs/index.html
@@ -65,7 +56,5 @@ jobs:
           git add -u
           git add docs/*
           git status
-          git commit -m "Convert PDF to HTML with OCR and generate sitemap"
+          git commit -m "Convert PDF to HTML and generate sitemap"
           git push
-          
-          
