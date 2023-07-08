@@ -24,11 +24,11 @@ jobs:
 
       - name: Find FindPkgConfig.cmake file
         run: |
-          find pdf2htmlEX -name "FindPkgConfig.cmake" -execdir mv {} ../ \;
+          find pdf2htmlEX -name "FindPkgConfig.cmake" -execdir mv {} ../FindPkgConfig.cmake \;
 
       - name: Modify FindPkgConfig.cmake
         run: |
-          sed -i 's/ REQUIRED libfontforge)//' FindPkgConfig.cmake
+          sed -i 's/ REQUIRED libfontforge)//' ../FindPkgConfig.cmake
 
       - name: Build and install pdf2htmlex
         run: |
