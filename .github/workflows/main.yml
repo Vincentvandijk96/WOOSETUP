@@ -13,16 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install pdf2htmlex and Tesseract OCR
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pdf2htmlex tesseract-ocr
+          sudo apt-get install -y poppler-utils tesseract-ocr
 
       - name: Remove existing HTML files
         run: |
           rm -f docs/*
 
-      - name: Convert PDF to HTML with OCR
+      - name: Convert PDF to HTML
         run: |
           echo "</ul></body></html>" >> docs/index.html
           mkdir -p docs
@@ -30,7 +30,16 @@ jobs:
           find . -name "*.pdf" -print0 | while IFS= read -r -d '' file; do
             filename=$(basename "$file" .pdf)
             htmlname="docs/$filename.html"
-            pdf2htmlEX --embed-image 0 --embed-css 0 --embed-font 0 --no-drm 1 --optimize-text 1 --split-pages 1 --tounicode 1 --dest-dir "$htmlname" --outfile "$filename.html" --image-res 150 --fit-width 800 --data-dir /usr/share/tesseract-ocr/4.00/tessdata "$file"
+            txtname="docs/$filename.txt"
+            pdftohtml -s -c "$file" "$htmlname"
+            pdftotext "$file" "$txtname"
+            text=$(cat "$txtname" | tr -d '\n' | tr -d '\r')
+            ocrtext=$(tesseract "$htmlname" stdout --psm 6)
+            if [[ -n $text ]]; then
+              sed -i "s|</body></html>|<pre>$text</pre></body></html>|" "$htmlname"
+            elif [[ -n $ocrtext ]]; then
+              sed -i "s|</body></html>|<pre>$ocrtext</pre></body></html>|" "$htmlname"
+            fi
             echo "<li><a href='$filename.html'>$filename</a></li>" >> docs/index.html
           done
           echo "</ul></body></html>" >> docs/index.html
