@@ -13,37 +13,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install pdf2htmlex
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libfontconfig1 libcairo2 libjpeg-turbo8
-          wget https://github.com/pdf2htmlEX/pdf2htmlEX/releases/download/v0.18.8.rc1/pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb
-          sudo mv pdf2htmlEX-0.18.8.rc1-master-20200630-Ubuntu-bionic-x86_64.deb pdf2htmlEX.deb
-          sudo apt install ./pdf2htmlEX.deb
-
       - name: Remove existing HTML files
         run: |
           rm -f docs/*
-
-      - name: Convert PDF to HTML
+          
+      - name: Copy PDF files to docs
         run: |
-          echo "</ul></body></html>" >> docs/index.html
-          echo "<html><body><ul>" > docs/index.html
-          find . -name "*.pdf" -print0 | while IFS= read -r -d '' file; do
-            filename=$(basename "$file" .pdf)
-            htmlname="docs/$filename.html"
-            pdf2htmlEX --embed cfijo --dest-dir docs "$file"
-            echo "<li><a href='$filename.html'>$filename</a></li>" >> docs/index.html
+          find . -name "*.pdf" -exec cp {} docs/ \;
+
+      - name: Create index.html
+        run: |
+          cd docs
+          echo "<html><body><ul>" > index.html
+          find . -name "*.pdf" | while read filename; do
+            echo "<li><a href='$filename'>$filename</a></li>" >> index.html
           done
-          echo "</ul></body></html>" >> docs/index.html
+          echo "</ul></body></html>" >> index.html
 
       - name: Generate sitemap.xml
         run: |
           cd docs
           echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > sitemap.xml
           echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" >> sitemap.xml
-          for file in *.html; do
-            filename=$(basename "$file" .html)
+          for file in *.pdf; do
+            filename=$(basename "$file" .pdf)
             echo "  <url>" >> sitemap.xml
             echo "    <loc>https://vincentvandijk96.github.io/WOO/$filename.html</loc>" >> sitemap.xml
             echo "  </url>" >> sitemap.xml
