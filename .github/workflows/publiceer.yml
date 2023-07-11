@@ -20,3 +20,26 @@ jobs:
           destination-repository: 'WOO'
           destination-directory: 'docs/'
           commit-email: 'vincentvandijk96@gmail.com'
+
+name: publiceren naar WOOSETUP
+
+on: push
+
+jobs:
+  copy-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Pushes test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.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 }}
+      with:
+        source_file: 'docs/*'
+        destination_repo: 'Vincentvandijk96/WOO'
+        destination_folder: 'docs/'
+        user_email: 'vincentvandijk96@gmail.com'
+        user_name: 'vincentvandijk96'
+        commit_message: 'publicatie'
