@@ -15,6 +15,12 @@ jobs:
         with:
           repository: Vincentvandijk96/WOOSETUP
           
+      - name: Set up destination repository
+        env:
+          DESTINATION_TOKEN: ${{ secrets.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 }}
+        run: |
+          git remote set-url origin "https://x-access-token:${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}@github.com/Vincentvandijk96/WOO.git"
+          
       - name: Remove 'docs' directory in destination repository
         run: |
           git config --global user.name "GitHub Actions"
