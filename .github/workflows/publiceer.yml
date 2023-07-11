@@ -1,11 +1,40 @@
+name: Kopieer folderinhoud naar andere repository
 
-        
-run: |
-    git clone https://.:${{ secrets.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 }}@github.com/WOO
-    rm docs/
-    copy WOOSETUP/docs/ WOO/docs
-    cd WOO/docs
-    git add .
-    git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
-    git push target master
+on:
+  push:
+    branches:
+      - main
 
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout bronrepository
+        uses: actions/checkout@v2
+
+      - name: Leeg doelrepository
+        uses: actions/checkout@v2
+        with:
+          repository: WOO
+          token: ${{ secrets.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 }}
+          path: ./temp  # Tijdelijke map voor doelrepository
+
+      - name: Verwijder inhoud doelrepository
+        run: |
+          rm -rf ./temp/*
+          rm -rf ./temp/.git*
+
+      - name: Kopieer bestanden naar doelrepository
+        run: |
+          cp -R ./docs/* ./temp/
+          cp -R ./docs/.git* ./temp/  # Inclusief .git-bestanden
+
+      - name: Commit en push wijzigingen naar doelrepository
+        run: |
+          cd ./temp
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Kopieer bestanden van bronrepository"
+          git push origin main
