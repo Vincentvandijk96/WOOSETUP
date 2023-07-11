@@ -1,26 +1,11 @@
 
-
-name: publiceren naar WOOSETUP
-
-on: push
-
-jobs:
-  copy-file:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Pushes test file
-      uses: dmnemec/copy_file_to_another_repo_action@main
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.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 }}
-      with:
-        source_file: 'docs/'
-        destination_repo: 'Vincentvandijk96/WOO'
-        destination_folder: 'docs/'
-        user_email: 'vincentvandijkprive@gmail.com'
-        user_name: 'Vincentvandijk96'
-        commit_message: 'publicatie'
         
+run: |
+    git clone https://.:${{ secrets.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 }}@github.com/WOO
+    rm docs/
+    copy WOOSETUP/docs/ WOO/docs
+    cd WOO/docs
+    git add .
+    git diff-index --quiet HEAD || git commit -m "Automatic publish from github.com/project"
+    git push target master
 
