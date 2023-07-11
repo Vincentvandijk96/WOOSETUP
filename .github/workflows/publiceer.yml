@@ -19,6 +19,6 @@ jobs:
         source_file: 'docs/'
         destination_repo: 'Vincentvandijk96/WOO'
         destination_folder: 'docs/'
-        user_email: 'vincentvandijk96@gmail.com'
-        user_name: 'vincentvandijk96'
+        user_email: 'vincentvandijkprive@gmail.com'
+        user_name: 'Vincentvandijk96'
         commit_message: 'publicatie'
