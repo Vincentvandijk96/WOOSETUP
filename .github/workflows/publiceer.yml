@@ -25,9 +25,9 @@ jobs:
 
       - name: Commit en push wijzigingen naar bestemmingsrepository
         run: |
-          cd ../WOO
+          cd WOO
           git config user.name "Vincentvandijk96"
-          git config user.email "Vincentvandijkprive@gmail.com"
+          git config user.email "vincentvandijkprive@gmail.com"
           git add docs
           git commit -m "Kopieer docs-map naar bestemmingsrepository"
           git push origin main
