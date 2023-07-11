@@ -1,23 +1,11 @@
-name: publiceren pdf documenten naar WOO repository 
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  convert:
-    runs-on: ubuntu-latest
-
-    steps:
-
-- name: Push generated webpage to another repository
-        uses: nkoppel/push-files-to-another-repository@1.1.0
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.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 }}
-        with:
-          source-files: 'docs/'
-          destination-username: 'Vincentvandijk96'
-          destination-repository: 'WOO'
-          destination-directory: 'docs/'
-          commit-email: 'vincentvandijk96@gmail.com'
+steps:
+  - name: Push generated webpage to another repository
+    uses: nkoppel/push-files-to-another-repository@1.1.0
+    env:
+      API_TOKEN_GITHUB: ${{ secrets.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 }}
+    with:
+      source-files: 'docs/'
+      destination-username: 'Vincentvandijk96'
+      destination-repository: 'WOO'
+      destination-directory: 'docs/'
+      commit-email: 'vincentvandijk96@gmail.com'
