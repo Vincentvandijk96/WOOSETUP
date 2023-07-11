@@ -27,8 +27,8 @@ jobs:
 
       - name: Kopieer bestanden naar doelrepository
         run: |
-          cp -R ./docs/* ./temp/
-          cp -R ./docs/.git* ./temp/  # Inclusief .git-bestanden
+          cp -R docs/* temp/
+          cp -R docs/.git* temp/  # Inclusief .git-bestanden
 
       - name: Commit en push wijzigingen naar doelrepository
         run: |
