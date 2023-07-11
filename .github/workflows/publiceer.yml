@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Push generated webpage to another repository
-        uses: nkoppel/push-files-to-another-repository@main
+        uses: nkoppel/push-files-to-another-repository@1.1.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.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 }}
         with:
