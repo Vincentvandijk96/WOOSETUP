@@ -1,4 +1,4 @@
-name: Kopieer folderinhoud naar andere repository
+name: Copy Docs to Destination
 
 on:
   push:
@@ -6,34 +6,31 @@ on:
       - main
 
 jobs:
-  copy-files:
+  copy_docs:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout bronrepository
-        uses: actions/checkout@v2
-
-      - name: Leeg doelrepository
+      - name: Checkout source repository
         uses: actions/checkout@v2
         with:
-          repository: Vincentvandijk96/WOO
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./temp  # Tijdelijke map voor doelrepository
-
-      - name: Verwijder inhoud doelrepository
+          repository: Vincentvandijk96/WOOSETUP
+          
+      - name: Remove 'docs' directory in destination repository
         run: |
-          rm -rf ./temp/*
-          rm -rf ./temp/.git*
-
-      - name: Kopieer bestanden naar doelrepository
-        run: |
-          cp -R docs/* temp/
-
-      - name: Commit en push wijzigingen naar doelrepository
-        run: |
-          cd ./temp
-          git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git clone https://github.com/Vincentvandijk96/WOO.git
+          cd WOO
+          git rm -r docs
+          git commit -m "Remove 'docs' directory"
+          git push origin main
+          
+      - name: Copy 'docs' directory to destination repository
+        run: |
+          git clone https://github.com/Vincentvandijk96/WOOSETUP.git
+          cd WOOSETUP
+          cp -r docs/ ../WOO/
+          cd ../WOO
           git add .
-          git commit -m "Kopieer bestanden van bronrepository"
+          git commit -m "Copy 'docs' directory"
           git push origin main
