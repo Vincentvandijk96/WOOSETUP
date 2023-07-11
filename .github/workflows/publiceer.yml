@@ -19,5 +19,5 @@ jobs:
           source-files: 'docs/'
           destination-username: 'Vincentvandijk96'
           destination-repository: 'WOO'
-          destination-directory: 'WOO'
+          destination-directory: 'docs/'
           commit-email: 'vincentvandijk96@gmail.com'
