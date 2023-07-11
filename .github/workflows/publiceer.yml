@@ -1,4 +1,4 @@
-name: publiceren pdf documenten
+name: publiceren pdf documenten naar WOO repository 
 
 on:
   push:
