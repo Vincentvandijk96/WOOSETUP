@@ -1,0 +1,32 @@
+name: Kopieer docs naar WOO repository
+
+on:
+  push:
+    branches:
+      - main  # Pas dit aan indien nodig
+
+jobs:
+  copy_docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout bronrepository
+      uses: actions/checkout@v2
+      
+    - name: Verwijder de bestaande 'docs'-map in WOO repository
+      run: |
+        git clone https://github.com/Vincentvandijk96/WOO.git
+        rm -rf WOO/docs
+      
+    - name: Kopieer 'docs'-map naar WOO repository
+      run: |
+        cp -r docs WOO/
+      
+    - name: Commit en push naar WOO repository
+      run: |
+        cd WOO
+        git config user.name <gebruikersnaam>
+        git config user.email <e-mailadres>
+        git add .
+        git commit -m "Bijgewerkte docs"
+        git push
