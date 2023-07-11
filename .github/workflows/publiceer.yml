@@ -17,10 +17,12 @@ jobs:
       run: |
         git clone https://github.com/Vincentvandijk96/WOO.git
         rm -rf WOO/docs
+      working-directory: ${{ github.workspace }}
       
     - name: Kopieer 'docs'-map naar WOO repository
       run: |
         cp -r docs WOO/
+      working-directory: ${{ github.workspace }}
       
     - name: Commit en push naar WOO repository
       run: |
@@ -30,3 +32,4 @@ jobs:
         git add .
         git commit -m "Bijgewerkte docs"
         git push
+      working-directory: ${{ github.workspace }}/WOO
