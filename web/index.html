@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opencoevorden.nl</title>
+  <style>
+    /* CSS styles for the layout */
+    body {
+      margin: -3px!important;
+      padding: 0;
+      font-family: arial, "Open Sans", sans-serif;
+      line-height: 1.71
+    }
+
+    div#inkorten {
+      margin-top: -45px;
+    }
+    
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      list-style-type: none;
+    }
+
+    li a {
+      text-decoration: none;
+      color: black;
+    }
+
+    ul {
+      padding: 0px;
+    }
+
+    #searchInput {
+      width: 95%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #96b522;
+      border: none;
+      text-align: center;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    #searchInput::placeholder {
+      color: black;
+    }
+
+    #searchInput:focus::placeholder {
+      color: #98b300;
+      border: none;
+    }
+
+    .prefix {
+      margin-right: 10px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #685c80;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    li.searchable a {
+    max-width: 80%;
+}
+
+    h1 {
+    color: #000;
+    font-size: 3.2rem;
+    margin-top: 0;
+    font-family: arial, "Open Sans", sans-serif;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5em;
+    letter-spacing: 0;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+        .copyright {
+      background-color: #685c80;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+
+    }
+
+    .linkedin-link {
+      color: #96b522;
+      text-decoration: none;
+      font-weight:bold;
+    }
+
+    .linkedin-link:visited {
+      color: #96b522;
+      font-weight:bold;
+    }
+
+    /* Media query for mobile devices */
+    @media only screen and (max-width: 600px) {
+      .content {
+        max-width: 100%;
+        padding:15px;
+      }
+
+      .prefix {
+        margin-right: 15px;
+        width: 40px;
+        height: 40px;
+      }
+      h1 {
+            font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="inkorten">
+    <div id="customgpt_chat"></div>
+    <script src="https://cdn.customgpt.ai/js/embed.js" div_id="customgpt_chat" p_id="7775" p_key="5096869d96f2d2122c108b3fee7478ec" width="100%" reset_conversation="1" height="500px"></script>
+  </div>
+
+  <script>
+    function search() {
+      var input = document.getElementById('searchInput');
+      var searchText = input.value.toLowerCase();
+      var elements = document.getElementsByClassName('searchable');
+
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        var text = element.innerText.toLowerCase();
+
+        if (text.includes(searchText)) {
+          element.style.display = 'flex';
+        } else {
+          element.style.display = 'none';
+        }
+      }
+    }
+  </script>
+
+  <div class="content">
+     <h1>Welkom op opencoevorden.nl</h1>
+<p>De Wet Open Overheid (Woo) regelt landelijk welke soorten informatie door overheden actief openbaar gemaakt moeten worden. Gemeente Coevorden werkt de komende jaren aan de aanpassingen die nodig zijn om dit te doen. Zoek hier naar documenten die de gemeente Coevorden openbaar heeft gemaakt. Deze documenten hebben te maken met de ideeën, plannen, regels en afspraken van Coevorden. </p>
+<hr>   <br> 
+    <input type="text" id="searchInput" placeholder="Klik hier om op document naam te zoeken" onkeyup="search()">
