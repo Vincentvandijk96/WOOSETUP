@@ -14,7 +14,7 @@ jobs:
     - name: Pushes test file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
-        API_TOKEN_GITHUB: ${{ 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 }}
+        API_TOKEN_GITHUB: ${{ secrets.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 }}
       with:
         source_file: 'docs/'
         destination_repo: 'Vincentvandijk96/WOO'
