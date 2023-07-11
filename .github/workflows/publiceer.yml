@@ -16,7 +16,7 @@ jobs:
       - name: Leeg doelrepository
         uses: actions/checkout@v2
         with:
-          repository: WOO
+          repository: Vincentvandijk96/WOO
           token: ${{ secrets.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 }}
           path: ./temp  # Tijdelijke map voor doelrepository
 
