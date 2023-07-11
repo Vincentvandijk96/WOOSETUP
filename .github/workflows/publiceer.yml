@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: Vincentvandijk96/WOO
-          token: ${{ secrets.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 }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: ./temp  # Tijdelijke map voor doelrepository
 
       - name: Verwijder inhoud doelrepository
