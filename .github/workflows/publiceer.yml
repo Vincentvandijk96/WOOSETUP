@@ -1,4 +1,5 @@
-name: Copy Docs to Destination
+        
+name: Kopieer docs-map naar bestemmingsrepository
 
 on:
   push:
@@ -6,37 +7,30 @@ on:
       - main
 
 jobs:
-  copy_docs:
+  copy_docs_map:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout source repository
+      - name: Checkout bronrepository
         uses: actions/checkout@v2
-        with:
-          repository: Vincentvandijk96/WOOSETUP
-          
-      - name: Set up destination repository
-        env:
-          DESTINATION_TOKEN: ${{ secrets.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 }}
+
+      - name: Verwijder docs-map in bestemmingsrepository
         run: |
-          git remote set-url origin "https://x-access-token:${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}@github.com/Vincentvandijk96/WOO.git"
-          
-      - name: Remove 'docs' directory in destination repository
-        run: |
-          git config --global user.name "Vincentvandijk1996"
-          git config --global user.email "Vincentvandijkprive@gmail.com"
           git clone https://github.com/Vincentvandijk96/WOO.git
           cd WOO
-          git rm -r docs
-          git commit -m "Remove 'docs' directory"
-          git push origin main
-          
-      - name: Copy 'docs' directory to destination repository
+          rm -rf docs
+
+      - name: Kopieer docs-map naar bestemmingsrepository
         run: |
-          git clone https://github.com/Vincentvandijk96/WOOSETUP.git
-          cd WOOSETUP
-          cp -r docs/ ../WOO/
-          cd ../WOO
-          git add .
-          git commit -m "Copy 'docs' directory"
-          git push origin main
+          cp -r ../WOOSETUP/docs ../WOO
+
+      - name: Commit en push wijzigingen naar bestemmingsrepository
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: Vincentvandijk96
+          author_email: Vincentvandijkprive@gmail.com
+          message: Kopieer docs-map naar bestemmingsrepository
+          add: 'docs'
+          branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
