@@ -1,4 +1,3 @@
-        
 name: Kopieer docs-map naar bestemmingsrepository
 
 on:
@@ -25,12 +24,10 @@ jobs:
           cp -r ../WOOSETUP/docs ../WOO
 
       - name: Commit en push wijzigingen naar bestemmingsrepository
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: Vincentvandijk96
-          author_email: Vincentvandijkprive@gmail.com
-          message: Kopieer docs-map naar bestemmingsrepository
-          add: 'docs'
-          branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.secrets.ghp_tcaUxMjxeEjnz0RpcmHBuc4SXKKM4T1yCjD }}
+        run: |
+          cd ../WOO
+          git config user.name "Vincentvandijk96"
+          git config user.email "Vincentvandijkprive@gmail.com"
+          git add docs
+          git commit -m "Kopieer docs-map naar bestemmingsrepository"
+          git push origin main
