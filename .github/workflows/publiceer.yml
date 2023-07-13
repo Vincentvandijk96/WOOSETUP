@@ -14,6 +14,6 @@ jobs:
           ref: main
       - run: |
           echo "Deleting all contents of docs folder in remote repository..."
-          rm -rf <remote-repository>/docs
+          rm -rf WOO/docs
           echo "Copying contents of docs folder from current repository to remote repository..."
           cp -r docs/ WOO/docs
