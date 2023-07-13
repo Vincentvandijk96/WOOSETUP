@@ -1,33 +1,19 @@
-name: Kopieer docs-map naar bestemmingsrepository
-
+name: Copy docs folder
 on:
   push:
     branches:
       - main
-
 jobs:
-  copy_docs_map:
+  copy-docs:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout bronrepository
-        uses: actions/checkout@v2
-
-      - name: Verwijder docs-map in bestemmingsrepository
-        run: |
-          git clone git@github.com:Vincentvandijk96/WOO.git
-          cd WOO
-          rm -rf docs
-
-      - name: Kopieer docs-map naar bestemmingsrepository
-        run: |
-          cp -r ../WOOSETUP/docs ../WOO
-
-      - name: Commit en push wijzigingen naar bestemmingsrepository
-        run: |
-          cd WOO
-          git config user.name "vincentvandijk96"
-          git config user.email "vincentvandijkprive@gmail.com"
-          git add docs
-          git commit -m "Kopieer docs-map naar bestemmingsrepository"
-          git push origin main
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: Vincentvandijk96/WOO
+          ref: main
+      - run: |
+          echo "Deleting all contents of docs folder in remote repository..."
+          rm -rf <remote-repository>/docs
+          echo "Copying contents of docs folder from current repository to remote repository..."
+          cp -r docs/ WOO/docs
