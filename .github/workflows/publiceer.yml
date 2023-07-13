@@ -1,26 +1,22 @@
-name: Publish docs to WOO
+name: Sync Docs
+
 on:
   push:
     branches:
-      - main
+      - Main
 
 jobs:
-  publish:
+  sync-docs:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Empty WOO/docs
-        run: |
-          rm -rf $GITHUB_WORKSPACE/WOO/docs/*
-      - name: Create WOO/docs directory
-        run: |
-          mkdir $GITHUB_WORKSPACE/WOO/docs
-      - name: Copy docs to WOO
-        run: |
-          cp -r $GITHUB_WORKSPACE/docs/* $GITHUB_WORKSPACE/WOO/docs
+        with:
+          repository: Vincentvandijk96/WOO
+          ref: Main
 
-      - name: Push to WOO
-        run: |
-          git add $GITHUB_WORKSPACE/WOO/docs
-          git commit -m "Publish docs"
-          git push
+      - name: Remove Docs Folder
+        run: rm -rf docs
+
+      - name: Copy Docs Folder
+        run: cp -r docs/. Vincentvandijk96/WOO/docs
