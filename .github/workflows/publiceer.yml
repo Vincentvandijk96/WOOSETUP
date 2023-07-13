@@ -21,3 +21,4 @@ jobs:
           git add $GITHUB_WORKSPACE/WOO/docs
           git commit -m "Publish docs"
           git push
+
