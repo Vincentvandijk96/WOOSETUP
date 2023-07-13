@@ -16,4 +16,4 @@ jobs:
           echo "Deleting all contents of docs folder in remote repository..."
           rm -rf WOO/docs
           echo "Copying contents of docs folder from current repository to remote repository..."
-          cp -r docs/ WOO/docs
+          cp -r docs/ Vincentvandijk96/WOO/docs
