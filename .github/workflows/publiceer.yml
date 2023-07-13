@@ -1,19 +1,23 @@
-name: Copy docs folder
+name: Publish docs to WOO
 on:
   push:
     branches:
-      - main
+      - master
+
 jobs:
-  copy-docs:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: Vincentvandijk96/WOO
-          ref: main
-      - run: |
-          echo "Deleting all contents of docs folder in remote repository..."
-          rm -rf WOO/docs
-          echo "Copying contents of docs folder from current repository to remote repository..."
-          cp -r docs/ Vincentvandijk96/WOO/docs
+      - name: Empty WOO/docs
+        run: |
+          rm -rf $GITHUB_WORKSPACE/WOO/docs/*
+      - name: Copy docs to WOO
+        run: |
+          cp -r $GITHUB_WORKSPACE/docs/* $GITHUB_WORKSPACE/WOO/docs
+
+      - name: Push to WOO
+        run: |
+          git add $GITHUB_WORKSPACE/WOO/docs
+          git commit -m "Publish docs"
+          git push
