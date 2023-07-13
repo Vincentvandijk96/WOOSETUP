@@ -3,7 +3,7 @@ name: Sync Docs
 on:
   push:
     branches:
-      - Main
+      - main
 
 jobs:
   sync-docs:
@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: Vincentvandijk96/WOO
-          ref: Main
+          ref: main
 
       - name: Remove Docs Folder
         run: rm -rf docs
