@@ -30,7 +30,6 @@ jobs:
             i=$(basename "$filename" | cut -c 1-2)
             echo "<li class=\"searchable\"><div class=\"prefix\">$i</div><a href='$(basename "$filename")'>$(basename "$filename")</a></li>" >> index.html
           done
-          done
           echo "</ul>" >> index.html
           echo "<div class="copyright">
           &copy; 2023 Gemaakt en bedacht door Vincent van Dijk | <a class="linkedin-link" href="https://www.linkedin.com/in/vincent-van-dijk-6a6431113/">LinkedIn</a>
