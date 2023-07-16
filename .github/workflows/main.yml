@@ -28,7 +28,8 @@ jobs:
           echo "<ul>" >> index.html
           find . -name "*.pdf" | sort -k1,1 | while read -r filename; do
             i=$(basename "$filename" | cut -c 1-2)
-            echo "<li class=\"searchable\"><div class=\"prefix\">$i</div><a href='$(basename "$filename")'>$(basename "$filename")</a></li>" >> index.html
+            description=$(basename "$filename" | cut -c 3-)
+            echo "<li class=\"searchable\"><div class=\"prefix\">$i</div><a href='$(basename "$filename")'>$description</a></li>" >> index.html
           done
           echo "</ul>" >> index.html
           echo "<div class="copyright">
