@@ -25,13 +25,13 @@ jobs:
         run: |
           cp web/index.html docs/index.html
           cd docs
-          echo "<ul id="itemList">" >> index.html
+          echo "<ul>" >> index.html
           find . -name "*.pdf" | sort -r -k1,1 | while read -r filename; do
               i=$(basename "$filename" | cut -d ' ' -f 1)
               description=$(basename "$filename" | cut -d ' ' -f 2-)
               echo "<li class=\"searchable\"><div class=\"prefix\">$i</div><a href='$(basename "$filename")'>$description</a></li>" >> index.html
           done
-          echo "</ul><div id="pagination"></div>" >> index.html
+          echo "</ul></div>" >> index.html
           echo "<div class="copyright">
           &copy; 2023 Gemaakt en bedacht door Vincent van Dijk | <a class="linkedin-link" href="https://www.linkedin.com/in/vincent-van-dijk-6a6431113/">LinkedIn</a>
           </div>" >> index.html
