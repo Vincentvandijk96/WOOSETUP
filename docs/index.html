@@ -138,29 +138,87 @@ p {
   </div>
 
   <script>
-    function search() {
-      var input = document.getElementById('searchInput');
-      var searchText = input.value.toLowerCase();
-      var elements = document.getElementsByClassName('searchable');
+// Lijst met alle items
+var allItems = [
+  { id: '1', name: 'Item 1' },
+  { id: '2', name: 'Item 2' },
+  { id: '3', name: 'Item 3' },
+  // Voeg hier meer items toe
+];
 
-      for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        var text = element.innerText.toLowerCase();
+var itemsPerPage = 10; // Aantal items per pagina
+var currentPage = 1; // Huidige pagina
+var totalPages = Math.ceil(allItems.length / itemsPerPage); // Totaal aantal pagina's
 
-        if (text.includes(searchText)) {
-          element.style.display = 'flex';
-        } else {
-          element.style.display = 'none';
-        }
-      }
+// Functie om de lijst met items weer te geven op basis van de huidige pagina
+function displayItems() {
+  var startIndex = (currentPage - 1) * itemsPerPage;
+  var endIndex = startIndex + itemsPerPage;
+  var itemsToDisplay = allItems.slice(startIndex, endIndex);
+
+  var itemListElement = document.getElementById('itemList');
+  itemListElement.innerHTML = '';
+
+  for (var i = 0; i < itemsToDisplay.length; i++) {
+    var item = itemsToDisplay[i];
+    var listItemElement = document.createElement('li');
+    listItemElement.textContent = item.name;
+    itemListElement.appendChild(listItemElement);
+  }
+
+  displayPagination();
+}
+
+// Functie om de paginering weer te geven
+function displayPagination() {
+  var paginationElement = document.getElementById('pagination');
+  paginationElement.innerHTML = '';
+
+  var prevButton = document.createElement('button');
+  prevButton.textContent = 'Vorige';
+  prevButton.disabled = (currentPage === 1);
+  prevButton.addEventListener('click', function () {
+    if (currentPage > 1) {
+      currentPage--;
+      displayItems();
     }
+  });
+  paginationElement.appendChild(prevButton);
+
+  var nextButton = document.createElement('button');
+  nextButton.textContent = 'Volgende';
+  nextButton.disabled = (currentPage === totalPages);
+  nextButton.addEventListener('click', function () {
+    if (currentPage < totalPages) {
+      currentPage++;
+      displayItems();
+    }
+  });
+  paginationElement.appendChild(nextButton);
+}
+
+// Functie om de lijst te doorzoeken
+function search() {
+  var searchInput = document.getElementById('searchInput').value.toLowerCase();
+  var filteredItems = allItems.filter(function (item) {
+    return item.name.toLowerCase().indexOf(searchInput) !== -1;
+  });
+
+  allItems = filteredItems;
+  currentPage = 1;
+  totalPages = Math.ceil(allItems.length / itemsPerPage);
+  displayItems();
+}
+
+// Initieel de lijst weergeven
+displayItems();
   </script>
 
   <div class="content">
      <h1>Welkom op opencoevorden.nl</h1>
 <p>De Wet Open Overheid (Woo) regelt landelijk welke soorten informatie door overheden actief openbaar gemaakt moeten worden. Gemeente Coevorden werkt de komende jaren aan de aanpassingen die nodig zijn om dit te doen. Zoek hier naar documenten die de gemeente Coevorden openbaar heeft gemaakt. Deze documenten hebben te maken met de ideeën, plannen, regels en afspraken van Coevorden. </p>
 <hr>   <br> 
-    <input type="text" id="searchInput" placeholder="Klik hier om op document naam te zoeken" onkeyup="search()">
+<input type="text" id="searchInput" placeholder="Klik hier om op document naam te zoeken" onkeyup="search()">
 <ul>
 <li class="searchable"><div class="prefix">03A</div><a href='03A Woo-verzoek permanente bewoning Ermerzand (2).pdf'>Woo-verzoek permanente bewoning Ermerzand (2).pdf</a></li>
 <li class="searchable"><div class="prefix">02B</div><a href='02B Bijlage 2. Ossehaar - VNG ledenbrief gevolgen oorlog Oekraïne (1) (1).pdf'>Bijlage 2. Ossehaar - VNG ledenbrief gevolgen oorlog Oekraïne (1) (1).pdf</a></li>
