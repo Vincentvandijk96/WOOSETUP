@@ -138,32 +138,24 @@ p {
   </div>
 
   <script>
-// Lijst met alle items
-var allItems = [
-  { id: '1', name: 'Item 1' },
-  { id: '2', name: 'Item 2' },
-  { id: '3', name: 'Item 3' },
-  // Voeg hier meer items toe
-];
-
 var itemsPerPage = 10; // Aantal items per pagina
 var currentPage = 1; // Huidige pagina
-var totalPages = Math.ceil(allItems.length / itemsPerPage); // Totaal aantal pagina's
+var totalPages; // Totaal aantal pagina's
 
 // Functie om de lijst met items weer te geven op basis van de huidige pagina
 function displayItems() {
+  var itemList = document.getElementsByClassName('searchable');
+  totalPages = Math.ceil(itemList.length / itemsPerPage);
+
   var startIndex = (currentPage - 1) * itemsPerPage;
   var endIndex = startIndex + itemsPerPage;
-  var itemsToDisplay = allItems.slice(startIndex, endIndex);
 
-  var itemListElement = document.getElementById('itemList');
-  itemListElement.innerHTML = '';
-
-  for (var i = 0; i < itemsToDisplay.length; i++) {
-    var item = itemsToDisplay[i];
-    var listItemElement = document.createElement('li');
-    listItemElement.textContent = item.name;
-    itemListElement.appendChild(listItemElement);
+  for (var i = 0; i < itemList.length; i++) {
+    if (i >= startIndex && i < endIndex) {
+      itemList[i].style.display = 'block';
+    } else {
+      itemList[i].style.display = 'none';
+    }
   }
 
   displayPagination();
@@ -200,14 +192,22 @@ function displayPagination() {
 // Functie om de lijst te doorzoeken
 function search() {
   var searchInput = document.getElementById('searchInput').value.toLowerCase();
-  var filteredItems = allItems.filter(function (item) {
-    return item.name.toLowerCase().indexOf(searchInput) !== -1;
-  });
+  var itemList = document.getElementsByClassName('searchable');
 
-  allItems = filteredItems;
+  for (var i = 0; i < itemList.length; i++) {
+    var item = itemList[i];
+    var itemName = item.textContent.toLowerCase();
+
+    if (itemName.includes(searchInput)) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  }
+
   currentPage = 1;
-  totalPages = Math.ceil(allItems.length / itemsPerPage);
-  displayItems();
+  totalPages = Math.ceil(Array.from(itemList).filter(item => item.style.display !== 'none').length / itemsPerPage);
+  displayPagination();
 }
 
 // Initieel de lijst weergeven
