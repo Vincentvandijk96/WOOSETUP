@@ -152,7 +152,7 @@ function displayItems() {
 
   for (var i = 0; i < itemList.length; i++) {
     if (i >= startIndex && i < endIndex) {
-      itemList[i].style.display = 'block';
+      itemList[i].style.display = 'flex';
     } else {
       itemList[i].style.display = 'none';
     }
@@ -199,7 +199,7 @@ function search() {
     var itemName = item.textContent.toLowerCase();
 
     if (itemName.includes(searchInput)) {
-      item.style.display = 'block';
+      item.style.display = 'flex';
     } else {
       item.style.display = 'none';
     }
