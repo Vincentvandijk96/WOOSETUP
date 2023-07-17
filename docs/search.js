@@ -1,29 +1,19 @@
-function search(query) {
-  // Get the PDF files in the repository.
-  var files = fs.readdirSync(".");
+const searchForm = document.querySelector('form');
+const searchInput = document.querySelector('input[name="query"]');
+const documentList = document.querySelector('ul');
 
-  // Filter the files that are PDFs.
-  var pdfFiles = files.filter(function(file) {
-    return file.endsWith(".pdf");
-  });
+searchForm.addEventListener('submit', (event) => {
+event.preventDefault();
 
-  // Search the PDF files for the query.
-  var results = pdfFiles.map(function(file) {
-    var content = fs.readFileSync(file, "utf8");
-    var matches = content.match(new RegExp(query, "i"));
-    return {
-      file: file,
-      matches: matches
-    };
-  });
+// Get the search query
+const query = searchInput.value;
 
-  // Display the results.
-  $("#results").html(results);
-}
+// Search for the query in the PDF documents
+const documents = [...documentList.children].filter(document => document.textContent.includes(query));
 
-$(document).ready(function() {
-  $("#search").on("submit", function(e) {
-    e.preventDefault();
-    search($("#query").val());
-  });
+// Render the results
+documentList.innerHTML = '';
+documents.forEach(document => {
+documentList.appendChild(document);
+});
 });
