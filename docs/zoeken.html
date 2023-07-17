@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>PDF Search Engine</title>
-<link rel="stylesheet" href="style.css">
+<title>PDF Search</title>
 </head>
 <body>
-
-<form action="/search" method="post">
-<input type="text" name="query" placeholder="Zoeken">
-<input type="submit" value="Zoeken">
+<form action="/search" method="get">
+<input type="text" name="query" placeholder="Search for...">
+<input type="submit" value="Search">
 </form>
 
-<div id="results"></div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="search.js"></script>
-
+<ul>
+{% for document in documents %}
+<li><a href="{{ document.url }}">{{ document.name }}</a></li>
+{% endfor %}
+</ul>
 </body>
 </html>
