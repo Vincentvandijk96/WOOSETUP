@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vincentvandijk96.github.io/WOO/01A-Woo-verzoek-correspondentie-financiering-realisatie-op.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/02A-Bijlage-1.-Ossehaar---Verzamelbrief-opvang-Oekraïne-(.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/02B-Bijlage-2.-Ossehaar---VNG-ledenbrief-gevolgen-oorlog-O.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/03A-Woo-verzoek-permanente-bewoning-Ermerzand-(2).pdf.pdf</loc>
+    <loc>https://vincentvandijk96.github.io/WOO/*.pdf</loc>
   </url>
 </urlset>
