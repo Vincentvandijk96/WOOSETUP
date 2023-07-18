@@ -24,6 +24,7 @@ jobs:
       - name: Create index.html
         run: |
           cp web/index.html docs/index.html
+          cp web/robots.txt docs/robots.txt
           cd docs
           echo "<ul>" >> index.html
           find . -name "*.pdf" | sort -r -k1,1 | while read -r filename; do
@@ -59,4 +60,3 @@ jobs:
           git status
           git commit -m "Convert PDF to HTML and generate sitemap"
           git push
-
