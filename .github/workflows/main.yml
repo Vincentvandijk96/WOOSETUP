@@ -13,7 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-          - name: Generate Sitemap
+      - name: Remove existing HTML files
+        run: |
+          rm -f docs/*
+
+      - name: Generate Sitemap
         run: |
           cd docs/
           echo '<?xml version="1.0" encoding="UTF-8"?>'
@@ -37,13 +41,10 @@ jobs:
           done
         
           echo '</urlset>'
-          > sitemap.xml
         env:
           DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Remove existing HTML files
-        run: |
-          rm -f docs/*
+
 
       - name: Copy PDF files to docs
         run: |
@@ -55,8 +56,6 @@ jobs:
           cp web/robots.txt docs/robots.txt
           cp web/script.js docs/script.js
 
-
-
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
@@ -66,4 +65,3 @@ jobs:
           git status
           git commit -m "Convert PDF to HTML and generate sitemap"
           git push
-          
