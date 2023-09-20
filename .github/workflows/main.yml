@@ -55,7 +55,6 @@ jobs:
       - name: Create index.html
         run: |
           cp web/index.html docs/index.html
-          cp web/robots.txt docs/robots.txt
           cp web/script.js docs/script.js
 
       - name: Commit changes
