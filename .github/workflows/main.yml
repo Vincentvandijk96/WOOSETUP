@@ -13,6 +13,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+          - name: Generate Sitemap
+        run: |
+          cd docs/
+          echo '<?xml version="1.0" encoding="UTF-8"?>'
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        
+          accessToken='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' # Vul hier je GitHub-toegangstoken in
+          repoOwner='Vincentvandijk96' # Vul hier de eigenaar van het repository in
+          repoName='WOOSETUP' # Vul hier de naam van het repository in
+          pathToDocs='docs/' # Het pad naar de map met PDF-bestanden
+        
+          apiUrl="https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}"
+        
+          # Use GitHub API to list PDF files in the 'docs' folder
+          curl -H "Authorization: token $accessToken" \
+               "$apiUrl" | \
+          jq -r '.[] | select(.name | endswith(".pdf")) | .name' | \
+          while read -r pdf; do
+            echo "  <url>"
+            echo "    <loc>https://github.com/${repoOwner}/${repoName}/blob/main/${pathToDocs}${pdf}</loc>"
+            echo "  </url>"
+          done
+        
+          echo '</urlset>'
+          > sitemap.xml
+        env:
+          DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Remove existing HTML files
         run: |
           rm -f docs/*
@@ -26,6 +54,7 @@ jobs:
           cp web/index.html docs/index.html
           cp web/robots.txt docs/robots.txt
           cp web/script.js docs/script.js
+
 
 
       - name: Commit changes
