@@ -11,7 +11,7 @@ async function fetchPDFs() {
         const data = await response.json();
 
         const pdfList = document.getElementById('pdf-list');
-        const searchInput = document.getElementById('search-input');
+        const searchInput = document.getElementById('searchinput');
 
         function filterPDFs() {
             const searchTerm = searchInput.value.toLowerCase();
