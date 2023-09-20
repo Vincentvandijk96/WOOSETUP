@@ -1,15 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/1A-Woo-verzoek-permanente-bewoning-Ermerzand.pdf.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/2A-Bijlage-1.-Ossehaar---Verzamelbrief-opvang-Oekraïne.pd.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/2B-Bijlage-2.-Ossehaar---VNG-ledenbrief-gevolgen-oorlog-Oe.pdf</loc>
-  </url>
-  <url>
-    <loc>https://vincentvandijk96.github.io/WOO/3A-Woo-verzoek-correspondentie-financiering-realisatie-opv.pdf</loc>
-  </url>
-</urlset>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Generator</title>
+</head>
+<body>
+    <script>
+        const accessToken = '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'; // Je persoonlijke toegangstoken hier invoegen
+        const repoOwner = 'Vincentvandijk96'; // De eigenaar van de repository
+        const repoName = 'WOOSETUP'; // De naam van de repository
+        const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
+
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}`;
+
+        fetch(apiUrl, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const sitemap = data
+                .filter(item => item.name.endsWith('.pdf'))
+                .map(item => `<url><loc>https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}</loc></url>`)
+                .join('');
+
+            const sitemapXML = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemap}</urlset>`;
+            const sitemapBlob = new Blob([sitemapXML], { type: 'application/xml' });
+            const sitemapURL = URL.createObjectURL(sitemapBlob);
+            
+            const sitemapLink = document.createElement('a');
+            sitemapLink.href = sitemapURL;
+            sitemapLink.download = 'sitemap.xml';
+            sitemapLink.textContent = 'Download Sitemap';
+            document.body.appendChild(sitemapLink);
+        });
+    </script>
+</body>
+</html>
