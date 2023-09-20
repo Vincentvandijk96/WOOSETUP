@@ -22,11 +22,23 @@ async function fetchPDFs() {
                     const fileName = item.name.toLowerCase();
                     if (fileName.includes(searchTerm)) {
                         const listItem = document.createElement('li');
+                        
+                        // Bestandsnaam splitsen om prefix en naam te verkrijgen
+                        const fileNameParts = item.name.split('-');
+                        const prefix = fileNameParts[0];
+                        const fileWithoutPrefix = fileNameParts.slice(1).join('-');
+                        
+                        // Maak een link naar het PDF-bestand op GitHub Pages
                         const link = document.createElement('a');
-                        // Pas de link aan om naar GitHub Pages te verwijzen
-                        link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
-                        link.textContent = item.name;
+                        link.href = `https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}`;
+                        link.textContent = fileWithoutPrefix; // Toon alleen de naam van het bestand
                         listItem.appendChild(link);
+                        
+                        // Voeg het voorvoegsel toe aan een aparte div
+                        const prefixDiv = document.createElement('div');
+                        prefixDiv.textContent = prefix;
+                        listItem.appendChild(prefixDiv);
+                        
                         pdfList.appendChild(listItem);
                     }
                 }
@@ -43,6 +55,9 @@ async function fetchPDFs() {
 }
 
 fetchPDFs();
+In deze bijgewerkte code wordt de bestandsnaam gesplitst met behulp van het "-" teken als scheidingsteken. Het eerste deel wordt toegewezen aan de variabele prefix, terwijl de rest van de delen weer worden samengevoegd om de bestandsnaam zonder het prefix te verkrijgen. Het voorvoegsel wordt in een aparte div geplaatst en weergegeven voordat de naam van het bestand in de link. Dit zou moeten resulteren in het gewenste gedrag waarbij het voorvoegsel wordt getoond in de "prefix" div en niet in de link naar het PDF-bestand.
+
+
 
 
 
