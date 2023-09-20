@@ -26,20 +26,8 @@ jobs:
           cp web/index.html docs/index.html
           cp web/robots.txt docs/robots.txt
           cp web/script.js docs/script.js
+          cp web/sitemap.xml  docs/sitemap.xml
 
-
-      - name: Generate sitemap.xml
-        run: |
-          cd docs
-          echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > sitemap.xml
-          echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" >> sitemap.xml
-          for file in *.pdf; do
-            filename=$(basename "$file" .pdf)
-            echo "  <url>" >> sitemap.xml
-            echo "    <loc>https://vincentvandijk96.github.io/WOO/$(echo "$filename" | sed 's/ /%20/g').pdf</loc>" >> sitemap.xml
-            echo "  </url>" >> sitemap.xml
-          done
-          echo "</urlset>" >> sitemap.xml
 
       - name: Commit changes
         run: |
