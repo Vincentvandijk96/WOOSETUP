@@ -1,7 +1,7 @@
 const accessToken = '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';
 const repoOwner = 'Vincentvandijk96';
 const repoName = 'WOOSETUP';
-const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
+const pathToDocs = 'docs/'; // The path to the folder containing PDF files
 
 const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}`;
 
@@ -15,24 +15,25 @@ async function fetchPDFs() {
 
         function filterPDFs() {
             const searchTerm = searchInput.value.toLowerCase();
-            pdfList.innerHTML = ''; // Leeg de lijst voordat je opnieuw gaat filteren
-            
+            pdfList.innerHTML = ''; // Clear the list before filtering again
+
             data.forEach(item => {
-                if (item.name.endsWith('.pdf')) {
-                    const fileName = item.name.toLowerCase();
+                if (item.name.toLowerCase().endsWith('.pdf')) {
+                    const fileNameParts = item.name.toLowerCase().split('.pdf');
+                    const fileName = fileNameParts[0] + '.pdf'; // Correct the file name format
                     if (fileName.includes(searchTerm)) {
                         const listItem = document.createElement('li');
 
-                        // Maak een div voor de prefix en voeg deze toe aan het lijstitem
+                        // Create a div for the prefix and add it to the list item
                         const prefixDiv = document.createElement('div');
                         prefixDiv.classList.add('prefix');
-                        prefixDiv.textContent = item.name.split('-')[0]; // Neem het deel voor het eerste "-"
+                        prefixDiv.textContent = fileName.split('-')[0]; // Take the part before the first "-"
                         listItem.appendChild(prefixDiv);
 
-                        // Maak de link naar het PDF-bestand en voeg deze toe aan het lijstitem
+                        // Create the link to the PDF file and add it to the list item
                         const link = document.createElement('a');
                         link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
-                        link.textContent = item.name.split('-').slice(1).join('-'); // Neem het deel na het eerste "-"
+                        link.textContent = fileName.split('-').slice(1).join('-'); // Take the part after the first "-"
                         listItem.appendChild(link);
 
                         pdfList.appendChild(listItem);
@@ -43,7 +44,7 @@ async function fetchPDFs() {
 
         searchInput.addEventListener('input', filterPDFs);
 
-        // Toon alle PDF's bij het starten van de pagina
+        // Display all PDFs when the page starts
         filterPDFs();
     } catch (error) {
         console.error(error);
