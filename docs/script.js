@@ -1,8 +1,9 @@
 const accessToken = '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';
 const repoOwner = 'https://github.com/Vincentvandijk96';
 const repoName = 'WOOSETUP';
+const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
 
-const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/`;
+const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}`;
 
 async function fetchPDFs() {
     try {
