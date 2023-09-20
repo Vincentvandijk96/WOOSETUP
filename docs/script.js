@@ -55,7 +55,6 @@ async function fetchPDFs() {
 }
 
 fetchPDFs();
-In deze bijgewerkte code wordt de bestandsnaam gesplitst met behulp van het "-" teken als scheidingsteken. Het eerste deel wordt toegewezen aan de variabele prefix, terwijl de rest van de delen weer worden samengevoegd om de bestandsnaam zonder het prefix te verkrijgen. Het voorvoegsel wordt in een aparte div geplaatst en weergegeven voordat de naam van het bestand in de link. Dit zou moeten resulteren in het gewenste gedrag waarbij het voorvoegsel wordt getoond in de "prefix" div en niet in de link naar het PDF-bestand.
 
 
 
