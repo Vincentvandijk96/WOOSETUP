@@ -26,7 +26,6 @@ jobs:
           cp web/index.html docs/index.html
           cp web/robots.txt docs/robots.txt
           cp web/script.js docs/script.js
-          cp web/sitemap.xml  docs/sitemap.xml
 
 
       - name: Commit changes
