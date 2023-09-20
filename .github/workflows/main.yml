@@ -13,14 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Remove existing HTML files
-        run: |
-          rm -f docs/*
-
-      - name: Copy PDF files to docs
-        run: |
-          find . -name "*.pdf" -exec sh -c 'newname=$(echo "{}" | sed "s/ /-/g" | cut -c 1-60); cp "{}" "docs/${newname}.pdf"' \;
-
 
       - name: Create index.html
         run: |
