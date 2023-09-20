@@ -16,7 +16,7 @@ async function fetchPDFs() {
             if (item.name.endsWith('.pdf')) {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
-                link.href = item.html_url;
+                link.href = `https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}`;
                 link.textContent = item.name;
                 listItem.appendChild(link);
                 pdfList.appendChild(listItem);
