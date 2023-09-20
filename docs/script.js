@@ -11,20 +11,38 @@ async function fetchPDFs() {
         const data = await response.json();
 
         const pdfList = document.getElementById('pdf-list');
-        
-        data.forEach(item => {
-            if (item.name.endsWith('.pdf')) {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
-                link.textContent = item.name;
-                listItem.appendChild(link);
-                pdfList.appendChild(listItem);
-            }
-        });
+        const searchInput = document.getElementById('search-input');
+
+        function filterPDFs() {
+            const searchTerm = searchInput.value.toLowerCase();
+            pdfList.innerHTML = ''; // Leeg de lijst voordat je opnieuw gaat filteren
+            
+            data.forEach(item => {
+                if (item.name.endsWith('.pdf')) {
+                    const fileName = item.name.toLowerCase();
+                    if (fileName.includes(searchTerm)) {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        // Pas de link aan om naar GitHub Pages te verwijzen
+                        link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
+                        link.textContent = item.name;
+                        listItem.appendChild(link);
+                        pdfList.appendChild(listItem);
+                    }
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', filterPDFs);
+
+        // Toon alle PDF's bij het starten van de pagina
+        filterPDFs();
     } catch (error) {
         console.error(error);
     }
 }
 
 fetchPDFs();
+
+
+
