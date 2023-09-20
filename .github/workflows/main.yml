@@ -32,7 +32,13 @@ jobs:
               description=$(basename "$filename" | cut -d '-' -f 2-)
               echo "<li class=\"searchable\"><div class=\"prefix\">$i</div><a href='$(basename "$filename")'>$description</a></li>" >> index.html
           done
-          echo "</ul></div>" >> index.html
+          echo "</ul>
+
+          <ul id="pdf-list">
+          </ul>
+          <script src="script.js"></script>
+          
+          </div>" >> index.html
           echo "<div class="copyright">
           &copy; 2023 Gemaakt en bedacht door Vincent van Dijk | <a class="linkedin-link" href="https://www.linkedin.com/in/vincent-van-dijk-6a6431113/">LinkedIn</a>
           </div>" >> index.html
