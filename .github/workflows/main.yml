@@ -67,3 +67,4 @@ jobs:
           git status
           git commit -m "Convert PDF to HTML and generate sitemap"
           git push
+          
