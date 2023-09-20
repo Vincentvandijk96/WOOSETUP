@@ -142,30 +142,20 @@ p {
     <script src="https://cdn.customgpt.ai/js/embed.js" div_id="customgpt_chat" p_id="7775" p_key="5096869d96f2d2122c108b3fee7478ec" width="100%" reset_conversation="1" height="500px"></script>
   </div>
 
-  <script>
-    function search() {
-      var input = document.getElementById('searchInput');
-      var searchText = input.value.toLowerCase();
-      var elements = document.getElementsByClassName('searchable');
-
-      for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        var text = element.innerText.toLowerCase();
-
-        if (text.includes(searchText)) {
-          element.style.display = 'flex';
-        } else {
-          element.style.display = 'none';
-        }
-      }
-    }
-  </script>
-
   <div class="content">
      <h1>Welkom op opencoevorden.nl</h1>
 <p>De Wet Open Overheid (Woo) regelt landelijk welke soorten informatie door overheden actief openbaar gemaakt moeten worden. Gemeente Coevorden werkt de komende jaren aan de aanpassingen die nodig zijn om dit te doen. Zoek hier naar documenten die de gemeente Coevorden openbaar heeft gemaakt. Deze documenten hebben te maken met de ideeën, plannen, regels en afspraken van Coevorden. </p>
 <hr>   <br> 
     <input type="text" id="searchInput" placeholder="Klik hier om op document naam te zoeken" onkeyup="search()">
+          <ul id="pdf-list">
+          </ul>
+          <script src="script.js"></script>
+          
+          </div>" >> index.html
+          echo "<div class="copyright">
+          &copy; 2023 Gemaakt en bedacht door Vincent van Dijk | <a class="linkedin-link" href="https://www.linkedin.com/in/vincent-van-dijk-6a6431113/">LinkedIn</a>
+          </div>" >> index.html
+          echo "</body></html>"
 <ul>
 <li class="searchable"><div class="prefix">3A</div><a href='3A-Woo-verzoek-correspondentie-financiering-realisatie-opv.pdf'>Woo-verzoek-correspondentie-financiering-realisatie-opv.pdf</a></li>
 <li class="searchable"><div class="prefix">2B</div><a href='2B-Bijlage-2.-Ossehaar---VNG-ledenbrief-gevolgen-oorlog-Oe.pdf'>Bijlage-2.-Ossehaar---VNG-ledenbrief-gevolgen-oorlog-Oe.pdf</a></li>
