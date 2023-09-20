@@ -22,24 +22,18 @@ async function fetchPDFs() {
                     const fileName = item.name.toLowerCase();
                     if (fileName.includes(searchTerm)) {
                         const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        // Pas de link aan om naar GitHub Pages te verwijzen
-                        link.href = `https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}`;
-                        
-                        // Haal de prefix van de bestandsnaam
-                        const fileNameParts = item.name.split('-');
-                        const prefix = fileNameParts[0];
-                        
-                        // Verberg het karakter in de bestandsnaam
-                        const displayedFileName = item.name.replace(`${prefix}-`, '');
 
-                        link.textContent = displayedFileName;
-                        listItem.appendChild(link);
-
-                        // Voeg de prefix toe aan een aparte div
+                        // Maak een div voor de prefix en voeg deze toe aan het lijstitem
                         const prefixDiv = document.createElement('div');
-                        prefixDiv.textContent = prefix;
+                        prefixDiv.classList.add('prefix');
+                        prefixDiv.textContent = item.name.split('-')[0]; // Neem het deel voor het eerste "-"
                         listItem.appendChild(prefixDiv);
+
+                        // Maak de link naar het PDF-bestand en voeg deze toe aan het lijstitem
+                        const link = document.createElement('a');
+                        link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
+                        link.textContent = item.name.split('-').slice(1).join('-'); // Neem het deel na het eerste "-"
+                        listItem.appendChild(link);
 
                         pdfList.appendChild(listItem);
                     }
@@ -57,7 +51,6 @@ async function fetchPDFs() {
 }
 
 fetchPDFs();
-
 
 
 
