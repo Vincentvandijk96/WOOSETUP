@@ -22,23 +22,25 @@ async function fetchPDFs() {
                     const fileName = item.name.toLowerCase();
                     if (fileName.includes(searchTerm)) {
                         const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        // Pas de link aan om naar GitHub Pages te verwijzen
+                        link.href = `https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}`;
                         
-                        // Bestandsnaam splitsen om prefix en naam te verkrijgen
+                        // Haal de prefix van de bestandsnaam
                         const fileNameParts = item.name.split('-');
                         const prefix = fileNameParts[0];
-                        const fileWithoutPrefix = fileNameParts.slice(1).join('-');
                         
-                        // Maak een link naar het PDF-bestand op GitHub Pages
-                        const link = document.createElement('a');
-                        link.href = `https://${repoOwner}.github.io/${repoName}/${pathToDocs}${item.name}`;
-                        link.textContent = fileWithoutPrefix; // Toon alleen de naam van het bestand
+                        // Verberg het karakter in de bestandsnaam
+                        const displayedFileName = item.name.replace(`${prefix}-`, '');
+
+                        link.textContent = displayedFileName;
                         listItem.appendChild(link);
-                        
-                        // Voeg het voorvoegsel toe aan een aparte div
+
+                        // Voeg de prefix toe aan een aparte div
                         const prefixDiv = document.createElement('div');
                         prefixDiv.textContent = prefix;
                         listItem.appendChild(prefixDiv);
-                        
+
                         pdfList.appendChild(listItem);
                     }
                 }
