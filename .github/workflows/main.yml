@@ -48,6 +48,7 @@ jobs:
           done
         
           echo '</urlset>'
+          > sitemap.xml
         env:
           DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
 
