@@ -49,7 +49,7 @@
     }
 
     #searchInput:focus::placeholder {
-      color: #98b300;
+      color: #ffffff;
       border: none;
     }
 
