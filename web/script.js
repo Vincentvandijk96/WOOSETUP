@@ -54,10 +54,10 @@ async function fetchPDFs() {
 fetchPDFs();
 
 // Maak een nieuw link-element aan om het CSS-bestand te laden
-var link = document.createElement("https://vincentvandijk96.github.io/WOOSETUP/style.css");
+var link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "jouw-stijl.css"; // Vervang dit door het pad naar jouw CSS-bestand
+link.href = "https://vincentvandijk96.github.io/WOOSETUP/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
 // Voeg het link-element toe aan de <head> van de HTML-pagina
 document.head.appendChild(link);
