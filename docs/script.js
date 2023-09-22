@@ -1,4 +1,4 @@
-const accessToken = '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';
+const accessToken = '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';
 const repoOwner = 'Vincentvandijk96';
 const repoName = 'WOOSETUP';
 const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
