@@ -1,7 +1,7 @@
 const accessToken = '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';
 const repoOwner = 'Vincentvandijk96';
 const repoName = 'WOOSETUP';
-const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
+const pathToDocs = 'pdf/'; // Het pad naar de map met PDF-bestanden
 
 const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}`;
 
