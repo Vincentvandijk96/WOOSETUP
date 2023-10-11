@@ -9,6 +9,8 @@ async function fetchPDFs() {
         const response = await fetch(apiUrl);
         const data = await response.json();
 
+        console.log('Opgehaalde gegevens:', data);
+
         const pdfList = document.getElementById('pdf-list');
         const searchInput = document.getElementById('searchInput');
 
