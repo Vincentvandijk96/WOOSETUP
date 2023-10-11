@@ -52,6 +52,12 @@ async function fetchPDFs() {
 }
 
 
+if (window.location.href.includes("woo-publicaties")) {
+    // Voer hier je functie uit
+    fetchPDFs();
+}
+
+
 // Maak een nieuw link-element aan om het CSS-bestand te laden
 var link = document.createElement("link");
 link.rel = "stylesheet";
