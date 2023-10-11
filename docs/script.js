@@ -69,7 +69,7 @@ if (window.location.href.includes("woo-publicaties")) {
 }
 } 
 
-document.addEventListener("DOMContentLoaded", applyScriptsAndStyles);
+window.addEventListener("load", applyScriptsAndStyles);
 
 
 
