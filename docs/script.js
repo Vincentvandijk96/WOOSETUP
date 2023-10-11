@@ -43,13 +43,13 @@ async function fetchPDFs() {
         searchInput.addEventListener('input', filterPDFs);
 
         // Toon alle PDF's bij het starten van de pagina
-        await filterPDFs();
+        filterPDFs();
     } catch (error) {
         console.error(error);
     }
 }
 
-fetchPDFs();
+await fetchPDFs();
 
 // Maak een nieuw link-element aan om het CSS-bestand te laden
 var link = document.createElement("link");
