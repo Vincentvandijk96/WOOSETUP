@@ -58,6 +58,7 @@ link.type = "text/css";
 link.href = "https://vincentvandijk96.github.io/WOOSETUP/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
 
+function applyScriptsAndStyles() {
 if (window.location.href.includes("woo-publicaties")) {
     // Voer het script uit
     fetchPDFs();
@@ -66,7 +67,9 @@ if (window.location.href.includes("woo-publicaties")) {
     document.head.appendChild(link);
     
 }
+} 
 
+document.addEventListener("DOMContentLoaded", applyScriptsAndStyles);
 
 
 
