@@ -51,9 +51,9 @@ async function fetchPDFs() {
     }
 }
 
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
     fetchPDFs();
-};
+});
 
 // Maak een nieuw link-element aan om het CSS-bestand te laden
 var link = document.createElement("link");
