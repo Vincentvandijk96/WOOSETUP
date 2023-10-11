@@ -43,7 +43,7 @@ async function fetchPDFs() {
         searchInput.addEventListener('input', filterPDFs);
 
         // Toon alle PDF's bij het starten van de pagina
-        filterPDFs();
+        await filterPDFs();
     } catch (error) {
         console.error(error);
     }
