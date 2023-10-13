@@ -27,7 +27,7 @@ jobs:
           for file in *.pdf; do
             filename=$(basename "$file" .pdf)
             echo "  <url>" >> sitemap.xml
-            echo "    <loc>https://vincentvandijk96.github.io/WOOSETUP/$(echo "$filename" | sed 's/ /%20/g').pdf</loc>" >> sitemap.xml
+            echo "    <loc>https://vincentvandijk96.github.io/woopublicatie/$(echo "$filename" | sed 's/ /%20/g').pdf</loc>" >> sitemap.xml
             echo "  </url>" >> sitemap.xml
           done
           echo "</urlset>" >> sitemap.xml
