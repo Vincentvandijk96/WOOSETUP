@@ -1,0 +1,47 @@
+name: publiceren pdf documenten
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Remove existing sitemap
+        run: |
+          rm -f docs/sitemap.xml
+          rm -f pdf/sitemap.xml
+
+
+      - name: Generate sitemap.xml
+        run: |
+          cd pdf
+          echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > sitemap.xml
+          echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" >> sitemap.xml
+          for file in *.pdf; do
+            filename=$(basename "$file" .pdf)
+            echo "  <url>" >> sitemap.xml
+            echo "    <loc>https://vincentvandijk96.github.io/WOO/$(echo "$filename" | sed 's/ /%20/g').pdf</loc>" >> sitemap.xml
+            echo "  </url>" >> sitemap.xml
+          done
+          echo "</urlset>" >> sitemap.xml
+
+      - name: copy sitemap
+        run: |
+          cp pdf/sitemap.xml docs/sitemap.xml
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -u
+          git add docs/*
+          git status
+          git commit -m "Convert PDF to HTML and generate sitemap"
+          git push
