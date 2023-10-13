@@ -26,7 +26,7 @@ async function fetchPDFs() {
                         // Maak een div voor de prefix en voeg deze toe aan het lijstitem
                         const prefixDiv = document.createElement('div');
                         prefixDiv.classList.add('prefix');
-                        prefixDiv.textContent = item.name.split('-')[0]; // Neem het deel voor het eerste "-"
+                        prefixDiv.textContent = item.name.split(' ')[0]; // Neem het deel voor het eerste "-"
                         listItem.appendChild(prefixDiv);
 
                         // Maak de link naar het PDF-bestand en voeg deze toe aan het lijstitem
