@@ -34,7 +34,7 @@ jobs:
 
       - name: copy sitemap
         run: |
-          c pdf/sitemap.xml docs/sitemap.xml
+          mv pdf/sitemap.xml docs/sitemap.xml
 
       - name: Commit changes
         run: |
