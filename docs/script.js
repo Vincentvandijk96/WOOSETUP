@@ -55,7 +55,7 @@ async function fetchPDFs() {
 var link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "https://vincentvandijk96.github.io/${repoName}/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
+link.href = "https://vincentvandijk96.github.io/woopublicatie/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
 //voer script uit
     fetchPDFs();
