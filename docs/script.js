@@ -1,5 +1,5 @@
 const repoOwner = 'Vincentvandijk96';
-const repoName = 'WOOSETUP';
+const repoName = 'woopublicatie';
 const pathToDocs = 'docs/'; // Het pad naar de map met PDF-bestanden
 const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToDocs}`;
 
@@ -55,12 +55,12 @@ async function fetchPDFs() {
 var link = document.createElement("link");
 link.rel = "stylesheet";
 link.type = "text/css";
-link.href = "https://vincentvandijk96.github.io/WOOSETUP/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
+link.href = "https://vincentvandijk96.github.io/${repoName}/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
-    //voer script uit
+//voer script uit
     fetchPDFs();
 
-    // Voeg het css in
+// Voeg het css in
     document.head.appendChild(link);
     
 
