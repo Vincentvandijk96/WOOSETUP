@@ -33,6 +33,7 @@ async function fetchPDFs() {
                         const link = document.createElement('a');
                         link.href = `https://${repoOwner}.github.io/${repoName}/${item.name}`;
                         link.textContent = item.name.split(' ').slice(1).join(' '); // Neem het deel na het eerste "-"
+                        link.target = '_blank'; // Open de link in een nieuw tabblad
                         listItem.appendChild(link);
 
                         pdfList.appendChild(listItem);
