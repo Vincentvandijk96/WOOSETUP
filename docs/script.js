@@ -57,6 +57,11 @@ link.rel = "stylesheet";
 link.type = "text/css";
 link.href = "https://vincentvandijk96.github.io/woopublicatie/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
+
+if (document.getElementById('pdf-list')) {
+    // voer hier je functie uit
+
+
 //voer script uit
     fetchPDFs();
 
@@ -64,7 +69,7 @@ link.href = "https://vincentvandijk96.github.io/woopublicatie/style.css"; // Ver
     document.head.appendChild(link);
     
 
-
+}
 
 
 
