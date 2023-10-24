@@ -1,5 +1,14 @@
  /* CSS styles for the layout */
+.body {
 
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: arial, "Open Sans", sans-serif;
+    font-weight: normal;
+    line-height: 1.71;
+    letter-spacing: 0;
+
+}
     li {
       display: flex;
       align-items: center;
@@ -52,13 +61,4 @@
 }
 
 
-.body {
 
-    margin: 0;
-    font-size: 1.8rem;
-    font-family: arial, "Open Sans", sans-serif;
-    font-weight: normal;
-    line-height: 1.71;
-    letter-spacing: 0;
-
-}
