@@ -58,21 +58,30 @@ link.rel = "stylesheet";
 link.type = "text/css";
 link.href = "https://vincentvandijk96.github.io/woopublicatie/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
-//voer script uit
-    fetchPDFs();
-
-// Voeg het css in
-    document.head.appendChild(link);
-
-
-if (document.getElementById('pdf-list')) {
-    // voer hier je functie uit
 
 
 
-    
+// Event listener die wordt geactiveerd wanneer de pagina is geladen
+window.addEventListener('load', function() {
+    // De gewenste URL waar je naar wilt controleren
+    var gewensteUrl = 'https://coevorden.acc.openonline.weareyou.io/woo-publicaties';
 
-}
+    // Huidige URL van de webpagina
+    var huidigeUrl = window.location.href;
 
+    // Controleer of de huidige URL overeenkomt met de gewenste URL
+    if (huidigeUrl === gewensteUrl) {
+        console.log('Je bent op de gewenste URL.');
+        // Voer hier de gewenste acties uit als de URL overeenkomt
+            //voer script uit
+            fetchPDFs();
+
+            // Voeg het css in
+            document.head.appendChild(link);
+    } else {
+        console.log('Je bent niet op de gewenste URL.');
+        // Voer hier de gewenste acties uit als de URL niet overeenkomt
+    }
+});
 
 
