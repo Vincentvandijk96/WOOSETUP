@@ -59,19 +59,10 @@ link.type = "text/css";
 link.href = "https://vincentvandijk96.github.io/woopublicatie/style.css"; // Vervang dit door het pad naar jouw CSS-bestand
 
 
-
-
-
-(function ($) {
-    Drupal.behaviors.customBehavior = {
-        attach: function (context, settings) {
-
             //voer script uit
             fetchPDFs();
 
             // Voeg het css in
             document.head.appendChild(link);
-        }
-    };
-})(jQuery);
+
 
